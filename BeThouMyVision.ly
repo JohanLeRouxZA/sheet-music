@@ -84,7 +84,7 @@ bsplit =
    #})
 
 %% ---------------------------------------------------------------
-%%  Music  —  absolute pitch, chords written low note first
+%%  Music  —  absolute pitch
 %%
 %%  Phrase plan (16 bars, 10.11.11.11):
 %%    line 1  bars  1– 4        line 3  bars  8–12
@@ -98,16 +98,16 @@ upper = {
   \global
   \stemUp
 
-  <bes ees'>4 <bes ees'> \tsplit { f'8 ees'8} { bes4 } |  % Be Thou my
-  <aes c'>4 \tsplit { bes } { bes } <aes c'>4 |  % Vi -- sion, O Lord
-  <bes ees''>4 <bes' d''> <g' ees''> ~                |  % of my heart;
-  <g' ees''>2 <g' bes'>4                             |  % (heart)      be
-  <aes' c''>4 <bes' d''> <bes' ees''>                |  % all else but
+  <bes ees'>4 <bes ees'> \tsplit { f'8 ees'8} { bes4 } |  % Be Thou My
+  <aes c'>4 \tsplit { bes } { bes } <aes c'>4          |  % Vi--sion, O
+  <bes ees'>4 <c' ees'> <f' d'>                 |  % Lord of my;
+  <g' bes>2 \tsplit { bes'8 g'8 } { ees'4 }                              |  % heart;     be
+  <f' d'>4 <f' d'> \tsplit { f' } { ees' }                  |  % all else but
   \break
-  <aes' f''>4 <g' ees''> <aes' c''>                  |  % naught to me,
-  <bes' d''>4 <aes' c''> <g' bes'>                   |  % save that Thou
-  <aes' c''>2 <g' bes'>4                             |  % art;          be
-  <g' ees''>4 <bes' f''> <bes' g''>                  |  % Thou my best
+  \tsplit { f' } { f' } <g' ees'> <bes' ees'>                  |  % naught to me,
+  <c'' ees'>4 <bes' ees'> <g' ees'>                   |  % save that Thou
+  <bes' f'>2 <bes' g'>4                             |  % art;          be
+  <c'' ees'>4 \tsplit {c''8 d''} {ees'4} \tsplit {ees''8 d''} {ees'4}                |  % Thou my best
   <c'' aes''>4 <bes' g''> <aes' f''>                 |  % thought in the
   \break
   <bes' f''>4 \tsplit { g''4 } { f''4 } <c'' aes''>4 |  % day and the
@@ -154,9 +154,9 @@ lineStart = \once \override LyricText.self-alignment-X = #LEFT
 
 verseOne = \lyricmode {
   \set stanza = "1."
-  \lineStart Be Thou my Vi -- sion, O Lord of my heart;
-  be all else but \lineStart naught to me, save that Thou art;
-  be Thou my best thought in the \lineStart day and the night,
+  \lineStart Be Thou my _ Vi -- sion, O Lord of my heart;
+  be _ all else but \lineStart naught to me, save that Thou art;
+  be Thou my _ best _ thought in the \lineStart day and the night,
   both wak -- ing and sleep -- ing, Thy pres -- ence my light.
 }
 
