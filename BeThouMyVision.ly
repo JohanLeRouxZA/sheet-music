@@ -98,24 +98,24 @@ upper = {
   \global
   \stemUp
 
-  <bes ees'>4 <bes ees'> \tsplit { f'8 ees'8} { bes4 } |  % Be Thou My
+  <bes ees'>4 <bes ees'> \tsplit { f'8 (ees'8) } { bes4 } |  % Be Thou My
   <aes c'>4 \tsplit { bes } { bes } <aes c'>4          |  % Vi--sion, O
   <bes ees'>4 <c' ees'> <f' d'>                 |  % Lord of my;
-  <g' bes>2 \tsplit { bes'8 g'8 } { ees'4 }                              |  % heart;     be
+  <g' bes>2 \tsplit { bes'8 (g'8) } { ees'4 }                              |  % heart;     be
   <f' d'>4 <f' d'> \tsplit { f' } { ees' }                  |  % all else but
   \break
   \tsplit { f' } { f' } <g' ees'> <bes' ees'>                  |  % naught to me,
   <c'' ees'>4 <bes' ees'> <g' ees'>                   |  % save that Thou
   <bes' f'>2 <bes' g'>4                             |  % art;          be
-  <c'' ees'>4 \tsplit {c''8 d''} {ees'4} \tsplit {ees''8 d''} {ees'4}                |  % Thou my best
-  <c'' aes''>4 <bes' g''> <aes' f''>                 |  % thought in the
+  <c'' ees'>4 \tsplit {c''8 ([d'']) } {ees'4} \tsplit {ees''8 ([d'']) } {ees'4}                |  % Thou my best
+  <c'' ees'>4 <bes' ees'> <g' ees'>                 |  % thought in the
   \break
-  <bes' f''>4 \tsplit { g''4 } { f''4 } <c'' aes''>4 |  % day and the
-  <bes' g''>2 <g' ees''>4                            |  % night,        both
-  <g' ees''>4 <bes' f''> <bes' g''>                  |  % wak -- ing and
-  <c'' aes''>4 <bes' g''> <aes' f''>                 |  % sleep -- ing, Thy
-  <bes' d''>4 <aes' c''> <g' bes'>                   |  % pres -- ence my
-  <g' ees''>2.                                       |  % light.
+  <bes' ees'>4 <ees' c'> <d' bes> |  % day and the
+  \tsplit {c'2} {c'2} \tsplit {bes4} {bes4}                           |  % night,        both
+  <ees' bes>4 <g' ees'> <bes' ees'>                  |  % wak -- ing and
+  <c'' ees'>8( <bes' d'>8) <g' ees'>4 \tsplit { ees'8( g'8) } { ees'4 }                 |  % sleep -- ing, Thy
+  <f' c'>4 <ees' c'> <ees' aes>                   |  % pres -- ence my
+  <ees' bes>2.                                       |  % light.
   \bar "|."
 }
 
@@ -123,22 +123,22 @@ lower = {
   \global
   \stemDown
 
-  <ees ees'>4 <ees ees'> <ees ees'>                  |
-  <c bes>4 \bsplit { bes8 c' } { bes,4 } <f c'>4     |
-  <ees bes>4 <bes, f> <ees bes> ~                    |
-  <ees bes>2 <ees g>4                                |
-  <aes, ees>4 <bes, f> <ees g>                       |
-  <f c'>4 <ees bes> <aes, ees>                       |
-  <bes, f>4 <f aes> <ees g>                          |
-  <aes, ees>2 <ees g>4                               |
-  <ees bes>4 <d bes> <ees g>                         |
-  <f aes>4 <ees bes> <d aes>                         |
-  <bes, f>4 <bes, d> <aes, ees>                      |
-  <ees bes>2 <ees g>4                                |
-  <ees bes>4 <d bes> <ees g>                         |
-  <f aes>4 <ees bes> <d aes>                         |
-  <bes, f>4 <f aes> <ees g>                          |
-  <ees bes>2.                                        |
+  <ees g>4 <ees g> <ees g,>                  |
+  <ees aes,>4 <d bes,> <ees aes,>     |
+  <ees g,>4 <g c> <bes bes,>                    |
+  <ees bes>2 <bes g,>4                                |
+  <bes bes,>4 <bes bes,> <a c>                       |
+  <bes d>4 <bes ees> <bes g,>                       |
+  <aes aes,>4 <bes g,> <c' c>                          |
+  <d' bes,>2 <d' bes,>4                               |
+  <aes aes,>4 \tsplit {aes8[ bes]} {aes,4} \tsplit {c'8[ bes]} {aes4}                        |
+  <aes ees>4 <g ees> <bes ees>                         |
+  <bes g,>4 <g c> <g g,>                      |
+  <ees aes,>2 <d bes,>4                                |
+  <g ees>4 <bes ees> <bes g,>                         |
+  \tsplit { aes4 } { aes,8[ bes,]} <g c>4 \tsplit {g8 bes} {c4}                         |
+  <aes aes,>4 <aes aes,> <aes c>                          |
+  <g ees>2.                                        |
 }
 
 %% ---------------------------------------------------------------
@@ -154,9 +154,9 @@ lineStart = \once \override LyricText.self-alignment-X = #LEFT
 
 verseOne = \lyricmode {
   \set stanza = "1."
-  \lineStart Be Thou my _ Vi -- sion, O Lord of my heart;
-  be _ all else but \lineStart naught to me, save that Thou art;
-  be Thou my _ best _ thought in the \lineStart day and the night,
+  \lineStart Be Thou my Vi -- sion, O Lord of my heart;
+  be all else but \lineStart naught to me, save that Thou art;
+  be Thou my best thought in the \lineStart day and the night,
   both wak -- ing and sleep -- ing, Thy pres -- ence my light.
 }
 
