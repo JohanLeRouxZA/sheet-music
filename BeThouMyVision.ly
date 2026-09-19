@@ -29,6 +29,7 @@
   markup-system-spacing.padding = #7
   system-system-spacing.padding = #6
 
+
   bookTitleMarkup = \markup {
     \column {
       \fill-line { \null \bold \fromproperty #'header:dedication }
@@ -131,12 +132,12 @@ lower = {
   <bes d>4 <bes ees> <bes g,>                       |
   <aes aes,>4 <bes g,> <c' c>                          |
   <d' bes,>2 <d' bes,>4                               |
-  <aes aes,>4 \tsplit {aes8[ bes]} {aes,4} \tsplit {c'8[ bes]} {aes4}                        |
+  <aes aes,>4 \bsplit {aes8[ bes]} {aes,4} \bsplit {c'8[ bes]} {aes4}                        |
   <aes ees>4 <g ees> <bes ees>                         |
   <bes g,>4 <g c> <g g,>                      |
   <ees aes,>2 <d bes,>4                                |
   <g ees>4 <bes ees> <bes g,>                         |
-  \tsplit { aes4 } { aes,8[ bes,]} <g c>4 \tsplit {g8 bes} {c4}                         |
+  \bsplit { aes4 } { aes,8[ bes,]} <g c>4 \bsplit {g8 bes} {c4}                         |
   <aes aes,>4 <aes aes,> <aes c>                          |
   <g ees>2.                                        |
 }
