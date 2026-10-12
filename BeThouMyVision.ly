@@ -1,51 +1,85 @@
 \version "2.24.0"
-
-%% ---------------------------------------------------------------
-%%  Be Thou My Vision  —  SLANE  —  hymnal no. 352
-%% ---------------------------------------------------------------
+#(set-global-staff-size 18)   % was 20 (default); 20 needs two pages
 
 \header {
-  dedication = "SUBMISSION AND PROFESSION"
+  %dedication = "SUBMISSION AND PROFESSION"
   title      = "Be Thou My Vision"
-  number     = "352"
+ %number     = "352"
   poet = \markup \left-column {
     "Irish hymn, 8th cent."
     "trans. Mary Elizabeth Byrne, 1905"
     "vers. Eleanor Hull, 1912, alt."
   }
-  meter = \markup \center-column { "SLANE" "10 11 11 11" }
+  meter = \markup \center-column {
+   %"SLANE" 
+   %"10 11 11 11" 
+   }
   composer = "Irish folk melody"
   tagline = ##f
 }
 
 \paper {
-  #(set-paper-size "letter")
-  top-margin    = 14\mm
-  bottom-margin = 14\mm
-  left-margin   = 18\mm
-  right-margin  = 18\mm
-  ragged-bottom = ##t
-  print-page-number = ##f
-  markup-system-spacing.padding = #7
-  system-system-spacing.padding = #6
+  #(set-paper-size "a4")
+  top-margin    = 25\mm
+  bottom-margin = 25\mm
+  left-margin   = 25\mm
+  right-margin  = 25\mm
 
+  % Fill the whole page, and keep everything on one page
+  ragged-bottom      = ##f
+  ragged-last-bottom = ##f
+  page-count         = 1
+  ragged-right  = ##f
+  ragged-last   = ##f
+  print-page-number = ##f
+
+  % Title block starts exactly at the top margin
+  top-markup-spacing =
+    #'((basic-distance . 0)
+       (minimum-distance . 0)
+       (padding . 0)
+       (stretchability . 0))
+
+  % Small, fixed gap between the title block and the first system.
+  % The real spacing around the credits is set inside bookTitleMarkup below.
+  markup-system-spacing =
+    #'((basic-distance . 0)
+       (minimum-distance . 0)
+       (padding . 1)
+       (stretchability . 0))
+
+  % The only stretchable space: all extra room goes between systems.
+  % (padding is only the minimum; the gaps stretch to fill the page)
+  system-system-spacing =
+    #'((basic-distance . 0)
+       (minimum-distance . 0)
+       (padding . 1)
+       (stretchability . 1))
+
+  % Last system ends exactly at the bottom margin
+  last-bottom-spacing =
+    #'((basic-distance . 0)
+       (minimum-distance . 0)
+       (padding . 0)
+       (stretchability . 0))
 
   bookTitleMarkup = \markup {
     \column {
-      \fill-line { \null \bold \fromproperty #'header:dedication }
-      \vspace #0.8
+      % Uncomment these two lines if you use a dedication:
+      % \fill-line { \null \bold \fromproperty #'header:dedication }
+      % \vspace #0.8
       \fill-line {
         \null
         \fontsize #8 \fromproperty #'header:title
         \fontsize #8 \fromproperty #'header:number
       }
-      \vspace #0.6
-      \fill-line {
+      \vspace #1          % gap ABOVE the credits
+      \override #'(baseline-skip . 2.5) \fontsize #3.5 \fill-line {
         \fromproperty #'header:poet
         \fromproperty #'header:meter
         \fromproperty #'header:composer
       }
-      \vspace #0.5
+      \vspace #0.5        % gap BELOW the credits (+1 padding above)
     }
   }
 }
@@ -54,21 +88,6 @@ global = {
   \key ees \major
   \time 3/4
 }
-
-%% ---------------------------------------------------------------
-%%  Split helpers
-%%
-%%  Each staff is normally ONE voice writing two-note chords on a
-%%  single stem.  Where the two parts need to be seen apart — they
-%%  move in different note values, or they sit a second apart — wrap
-%%  that moment in \tsplit (treble) or \bsplit (bass):
-%%
-%%      \tsplit { upper-part music } { lower-part music }
-%%
-%%  The upper argument stays in the enclosing voice, so lyrics keep
-%%  following it without interruption.  Afterwards the staff returns
-%%  to single-stem chords automatically.
-%% ---------------------------------------------------------------
 
 tsplit =
 #(define-music-function (up down) (ly:music? ly:music?)
@@ -84,39 +103,26 @@ bsplit =
      \oneVoice \stemDown
    #})
 
-%% ---------------------------------------------------------------
-%%  Music  —  absolute pitch
-%%
-%%  Phrase plan (16 bars, 10.11.11.11):
-%%    line 1  bars  1– 4        line 3  bars  8–12
-%%    line 2  bars  4– 8        line 4  bars 12–16
-%%  Each line ends on a half note, with the next line's first
-%%  syllable as an upbeat on beat 3.  Systems break after bars 5
-%%  and 10, as on the printed page.
-%% ---------------------------------------------------------------
-
 upper = {
   \global
   \stemUp
 
-  <bes ees'>4 <bes ees'> \tsplit { f'8 (ees'8) } { bes4 } |  % Be Thou My
-  <aes c'>4 \tsplit { bes } { bes } <aes c'>4          |  % Vi--sion, O
-  <bes ees'>4 <c' ees'> <f' d'>                 |  % Lord of my;
-  <g' bes>2 \tsplit { bes'8 (g'8) } { ees'4 }                              |  % heart;     be
-  <f' d'>4 <f' d'> \tsplit { f' } { ees' }                  |  % all else but
-  \break
-  \tsplit { f' } { f' } <g' ees'> <bes' ees'>                  |  % naught to me,
-  <c'' ees'>4 <bes' ees'> <g' ees'>                   |  % save that Thou
-  <bes' f'>2 <bes' g'>4                             |  % art;          be
-  <c'' ees'>4 \tsplit {c''8 ([d'']) } {ees'4} \tsplit {ees''8 ([d'']) } {ees'4}                |  % Thou my best
-  <c'' ees'>4 <bes' ees'> <g' ees'>                 |  % thought in the
-  \break
-  <bes' ees'>4 <ees' c'> <d' bes> |  % day and the
-  \tsplit {c'2} {c'2} \tsplit {bes4} {bes4}                           |  % night,        both
-  <ees' bes>4 <g' ees'> <bes' ees'>                  |  % wak -- ing and
-  <c'' ees'>8( <bes' d'>8) <g' ees'>4 \tsplit { ees'8( g'8) } { ees'4 }                 |  % sleep -- ing, Thy
-  <f' c'>4 <ees' c'> <ees' aes>                   |  % pres -- ence my
-  <ees' bes>2.                                       |  % light.
+  <bes ees'>4 <bes ees'> \tsplit { f'8 (ees'8) } { bes4 }                         |
+  <aes c'>4 \tsplit { bes } { bes } <aes c'>4                                     |
+  <bes ees'>4 <c' ees'> <f' d'>                                                   |
+  <g' bes>2 \tsplit { bes'8 (g'8) } { ees'4 }                                     |
+  <f' d'>4 <f' d'> \tsplit { f' } { ees' }                                        |
+  \tsplit { f' } { f' } <g' ees'> <bes' ees'>                                     |
+  <c'' ees'>4 <bes' ees'> <g' ees'>                                               |
+  <bes' f'>2 <bes' g'>4                                                           |
+  <c'' ees'>4 \tsplit {c''8 ([d'']) } {ees'4} \tsplit {ees''8 ([d'']) } {ees'4}   |
+  <c'' ees'>4 <bes' ees'> <g' ees'>                                               |
+  <bes' ees'>4 <ees' c'> <d' bes>                                                 |
+  \tsplit {c'2} {c'2} \tsplit {bes4} {bes4}                           |
+  <ees' bes>4 <g' ees'> <bes' ees'>                  |
+  <c'' ees'>8( <bes' d'>8) <g' ees'>4 \tsplit { ees'8( g'8) } { ees'4 }                 |
+  <f' c'>4 <ees' c'> <ees' aes>                   |
+  <ees' bes>2.                                       |
   \bar "|."
 }
 
@@ -142,14 +148,6 @@ lower = {
   <g ees>2.                                        |
 }
 
-%% ---------------------------------------------------------------
-%%  Text
-%%
-%%  \lineStart left-aligns a syllable on its note instead of
-%%  centring it.  Put it on the first syllable of each system in
-%%  every stanza so the left edges line up vertically.  Systems
-%%  begin at bars 1, 6 and 11, i.e. syllables 1, 15 and 29.
-%% ---------------------------------------------------------------
 
 lineStart = \once \override LyricText.self-alignment-X = #LEFT
 
@@ -186,16 +184,12 @@ verseFour = \lyricmode {
 }
 
 verseFive = \lyricmode {
-  \set stanza = "5."
+  \set stanza = "3."
   \lineStart High King of heav -- en, Thou heav -- en's bright Sun,
   O grant me its \lineStart joys, af -- ter vic -- t'ry is won;
   Great Heart of my own heart, what -- \lineStart ev -- er be -- fall,
   still be Thou my Vi -- sion, O Rul -- er of all.
 }
-
-%% ---------------------------------------------------------------
-%%  Score
-%% ---------------------------------------------------------------
 
 \score {
   \new ChoirStaff <<
@@ -203,8 +197,8 @@ verseFive = \lyricmode {
 
     \new Lyrics \lyricsto "melody" \verseOne
     \new Lyrics \lyricsto "melody" \verseTwo
-    \new Lyrics \lyricsto "melody" \verseThree
-    \new Lyrics \lyricsto "melody" \verseFour
+    % \new Lyrics \lyricsto "melody" \verseThree
+    % \new Lyrics \lyricsto "melody" \verseFour
     \new Lyrics \lyricsto "melody" \verseFive
 
     \new Staff = "lower" { \clef bass \lower }
@@ -212,6 +206,7 @@ verseFive = \lyricmode {
 
   \layout {
     indent = 0
+    system-count = 4   % one system per line of the hymn
     \context {
       \Score
       \override BarNumber.break-visibility = ##(#f #f #f)
@@ -225,23 +220,26 @@ verseFive = \lyricmode {
     \context {
       \ChoirStaff
       \override SystemStartBracket.stencil = ##f
+      % Keep each system's internal spacing fixed; only gaps between systems stretch
+      \override StaffGrouper.staff-staff-spacing.stretchability = #0
+      \override StaffGrouper.staffgroup-staff-spacing.stretchability = #0
     }
     \context {
       \Lyrics
-      \override LyricText.font-size = #0.5
-      %% centre the stanza block between the two staves
+      \override LyricSpace.minimum-distance = #1.2   % keep words from touching
+      \override StanzaNumber.font-size = #3.5
+      \override LyricText.font-size = #3.5            % same size as the credits
       \override VerticalAxisGroup.staff-affinity = #CENTER
-      %% gap up to the treble staff
+      % Same clearance above and below the lyrics (measured from the actual
+      % notes/stems, not from the staff lines)
       \override VerticalAxisGroup.nonstaff-relatedstaff-spacing =
-        #'((basic-distance . 9) (minimum-distance . 5) (padding . 0.5))
-      %% gap down to the bass staff
+        #'((basic-distance . 0) (minimum-distance . 0) (padding . 1.2) (stretchability . 0))
       \override VerticalAxisGroup.nonstaff-unrelatedstaff-spacing =
-        #'((basic-distance . 5) (minimum-distance . 3) (padding . 0.5))
-      %% gap between the stanzas themselves
+        #'((basic-distance . 5) (minimum-distance . 3) (padding . 1))
       \override VerticalAxisGroup.nonstaff-nonstaff-spacing =
-        #'((basic-distance . 2.6) (padding . 0.2))
+        #'((basic-distance . 2.6) (padding . 1))
     }
   }
 
-  \midi { \tempo 4 = 96 }
+  \midi {}
 }
