@@ -14,7 +14,7 @@
    %"SLANE" 
    %"10 11 11 11" 
    }
-  composer = "Irish folk melody"
+  % composer = "Irish folk melody"
   tagline = ##f
 }
 
